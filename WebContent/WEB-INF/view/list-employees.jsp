@@ -16,6 +16,9 @@
 		</div>
 		<div id="container">
 			<div id="content">
+			<input type="button" class="addButton" value="Add EMployee"
+			onclick="window.location.href='addForm'; return false;"
+			/>
 				<table>
 					<tr>
 						<th>First Name</th>
