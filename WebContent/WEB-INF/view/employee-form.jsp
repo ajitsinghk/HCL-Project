@@ -136,6 +136,8 @@ tr:nth-child(odd) {
 	margin-bottom: 15px;
 	background: #5b7dca;
 }
+
+.error{color:red}
 </style>
 
 </head>
@@ -160,18 +162,21 @@ tr:nth-child(odd) {
 			<table>
 				<tbody>
 					<tr>
-						<td><label>First name</label></td>
-						<td><form:input path="firstName" /></td>
+						<td><label>First name(*)</label></td>
+						<td><form:input path="firstName"/>
+						<form:errors path="firstName" cssClass="error"/></td>
 					</tr>
 
 					<tr>
-						<td><label>Last name</label></td>
-						<td><form:input path="lastName" /></td>
+						<td><label>Last name(*)</label></td>
+						<td><form:input path="lastName"/> 
+						<form:errors path="lastName" cssClass="error"/></td>
 					</tr>
 
 					<tr>
-						<td><label>Email</label></td>
-						<td><form:input path="email" /></td>
+						<td><label>Email(*)</label></td>
+						<td><form:input path="email"/>
+						<form:errors path="email" cssClass="error"/></td>
 					</tr>
 
 					<tr>

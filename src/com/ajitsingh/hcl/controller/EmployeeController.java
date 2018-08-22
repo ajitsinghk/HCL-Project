@@ -2,10 +2,16 @@ package com.ajitsingh.hcl.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +22,7 @@ import com.ajitsingh.hcl.entity.Employee;
 import com.ajitsingh.hcl.service.EmployeeService;
 
 @Controller
-@RequestMapping("employee")
+@RequestMapping("/employee")
 public class EmployeeController {
 
 	/*
@@ -31,7 +37,7 @@ public class EmployeeController {
 
 	// Refactored to GetMapping
 	// @RequestMapping("list")
-	@GetMapping("list")
+	@GetMapping("/list")
 	public String listEmployees(Model theModel) {
 		/*
 		 * Up08: refactored // getting employee from dao // List<Employee> theEmployee =
@@ -58,7 +64,12 @@ public class EmployeeController {
 	
 	
 	@PostMapping("/saveEmployee")
-	public String saveEmployee(@ModelAttribute("employee") Employee theEmployee) {
+	public String saveEmployee(@Valid @ModelAttribute("employee") Employee theEmployee,
+			BindingResult theBindingResult) {
+		
+		if(theBindingResult.hasErrors()) {
+			return "employee-form";
+		}
 		
 		employeeService.saveEmployee(theEmployee);
 		
@@ -97,8 +108,12 @@ public class EmployeeController {
 			} 
 	
 	
-	
-	
+	//White Spacing trimming
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		StringTrimmerEditor stm = new StringTrimmerEditor(true);
+		dataBinder.registerCustomEditor(String.class, stm);
+	}
 	
 	
 	

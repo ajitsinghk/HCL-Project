@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 // Mpping class to database
@@ -24,13 +27,22 @@ public class Employee {
 	private int id;
 	
 	@Column(name="first_name")
+	@NotNull(message="is required")
+	@Size(min=1,max=10, message="min 1 char & max 10 char")
 	private String firstName;
 	
+	@NotNull(message="is required")
+	@Size(min=1,max=10, message="min 1 char & max 10 char")
 	@Column(name="last_name")
 	private String lastName;
 	
+	
+	@NotNull(message="is required")
+	@Pattern(regexp="^.+@[^\\.].*\\.[a-z]{2,}$", message="enter valid email")
 	@Column(name="email")
 	private String email;
+	
+	
 
 	public int getId() {
 		return id;
