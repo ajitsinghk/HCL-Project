@@ -51,7 +51,9 @@ public class EmployeeController {
 		// return view page
 		return "list-employees";
 	}
-
+	
+	
+	//When clicked on Add employee, this gets executed
 	@GetMapping("/addForm")
 	public String addForms(Model theModel) {
 
