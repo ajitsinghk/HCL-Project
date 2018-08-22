@@ -12,7 +12,6 @@ import com.ajitsingh.hcl.entity.Employee;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 	
-	
 	//EmployeeDAO inject
 	
 	@Autowired
@@ -23,8 +22,31 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	public List<Employee> getEmployee() {
-
 		return employeeDAO.getEmployee();
+	}
+	
+	@Override
+	@Transactional
+	public void saveEmployee(Employee theEmployee) {
+		employeeDAO.saveEmployee(theEmployee);	
+	}
+
+	@Override
+	@Transactional
+	public Employee getEmployee(int theId) {
+		return employeeDAO.getEmployee(theId);
+	}
+
+	@Override
+	@Transactional
+	public void deleteEmployee(int theId) {
+		 employeeDAO.deleteEmployee(theId);
+	}
+
+	@Override
+	@Transactional
+	public List<Employee> searchEmployee(String theSearchName) {
+		return employeeDAO.searchEmployees(theSearchName);
 	}
 
 }
