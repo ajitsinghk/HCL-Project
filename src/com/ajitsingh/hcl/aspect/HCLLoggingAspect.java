@@ -1,12 +1,14 @@
 package com.ajitsingh.hcl.aspect;
 
-import java.util.logging.Logger;
+
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -14,7 +16,9 @@ import org.springframework.stereotype.Component;
 public class HCLLoggingAspect {
 
 	// Setup for logger
-	private Logger myLogger = Logger.getLogger(getClass().getName());
+	private Logger LOGGER = LoggerFactory.getLogger(HCLLoggingAspect.class);
+//	long BEFORE_EXECUTION=0;
+//	long AFTER_EXECUTION=0;
 
 	// Setup for pointcut declaration
 
@@ -44,13 +48,13 @@ public class HCLLoggingAspect {
 
 		// display methods we are calling
 		String theMethod = theJoinPoint.getSignature().toShortString();
-		myLogger.info("<<======> @Before: calling method " + theMethod);
+		LOGGER.info("<<======> @Before: calling method " + theMethod);
 
 		// display method arguments to the method
 		Object[] args = theJoinPoint.getArgs();
 
 		for (Object tempArg : args)
-			myLogger.info("<<======>> arguments: " + tempArg);
+			LOGGER.info("<<======>> arguments: " + tempArg);
 
 	}
 
@@ -63,10 +67,10 @@ public class HCLLoggingAspect {
 		
 		//display method we are returning from
 		String theMethod = theJoinPoint.getSignature().toShortString();
-		myLogger.info("<<======> @AfterReturning: from method " + theMethod);
+		LOGGER.info("<<======> @AfterReturning: from method " + theMethod);
 		
 		//display data returned
-		myLogger.info("<<======> result : " + theResult);
+		LOGGER.info("<<======> result : " + theResult);
 		
 	}
 	
